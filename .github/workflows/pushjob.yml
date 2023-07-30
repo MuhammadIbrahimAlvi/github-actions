@@ -1,0 +1,34 @@
+name: pushjob
+
+on: 
+  push:
+      branches:
+	 - main
+
+jobs:
+    job1:
+	name: First Job
+	runs-on: ubuntu-latest
+	steps:
+	- name: Step For printing Date
+	- run: echo "Current Date: $(date +'%Y-%m-%d %H:%M:%S')"
+    job2:
+	name: Second Job
+	runs-on: window-latest
+	steps:
+	- name: Step For printing Date
+	- run: echo "Current Date: $(date +'%Y-%m-%d %H:%M:%S')"
+    job3:
+	name: Third Job
+	runs-on: macos-latest
+	steps:
+	- name: Step For printing Date
+	- run: echo "Current Date: $(date +'%Y-%m-%d %H:%M:%S')"
+    job4:
+	name: Fourth Dependent Job
+	runs-on: ubuntu-latest
+	needs: [job1,job2,job3,job4]
+	steps:
+	- name: Print Date After Job1, Job2 and Job3 Sucessfully Executed
+	- run: echo "Current Date: $(date +'%Y-%m-%d %H:%M:%S')"
+
